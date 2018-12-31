@@ -22,9 +22,10 @@ function load()
     return responseText
 }
 function setText(element, load1) {
+    console.log("about to place value in area");
     var elementById = document.getElementById('message');
     console.log(load1);
-    elementById.text = load1;
+    elementById.innerText = load1;
     return elementById
 }
 function show(element) {

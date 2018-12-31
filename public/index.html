@@ -12,14 +12,6 @@
 </head>
 
 <body class="">
-    <div class="wrapper">
-        <div class="graphics">
-            <div class="tower">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
-                     viewBox="-11 170 1000 429" enable-background="new -11 170 1000 429" xml:space="preserve">
-                </svg>
-            </div>
-        </div>
 
         <header>
             <nav class="website-nav">
@@ -36,23 +28,26 @@
                 <h1>Convey</h1>
                 <h2>messaging</h2>
                     <div style="border: darkgrey">
-                        <button onclick="load()" style="background-color: transparent;">
+                        <p>
+                            <button style="background-color: transparent" onclick="show('message')">
                             Click to start conversation
                         </button>
+                        </p>
                     </div>
-                <div class="jumbotron" style="border: darkgrey; color: white; background-color: black">ttt
+                <p>
+                <div id="message" class="jumbotron" style="border: darkgrey; color: white; background-color: black">
+                    ttt
                 </div>
+                </p>
             </div>
         </div>
-        <input id="message" value="asdf">
     </div>
 
+        <!--<script src="assets/js/set-background.js"/>-->
+        <script src="assets/js/conversation.js"></script>
     <footer>
         <p class="footer-contents">Designed and developed with <a href="https://aws.amazon.com/careers/devtools-jobs/">♥</a> in Seattle.</p>
     </footer>
-
-    <!--<script src="assets/js/set-background.js"></script>-->
-    </script src = "assets/js/conversation.js">
 </body>
 
 </html>
