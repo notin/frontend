@@ -1,6 +1,7 @@
 
 function load()
 {
+    console.log('attempting to make call ');
     const http = new XMLHttpRequest();
     const url='http://localhost:8080/conversation?id=null';
     http.open('GET', url, false);
@@ -21,9 +22,9 @@ function load()
     return responseText
 }
 function setText(element, load1) {
-    var elementById = document.getElementById(element);
+    var elementById = document.getElementById('message');
     console.log(load1);
-    elementById.value = load1;
+    elementById.text = load1;
     return elementById
 }
 function show(element) {

@@ -15,7 +15,7 @@
     <div class="wrapper">
         <div class="graphics">
             <div class="tower">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
                      viewBox="-11 170 1000 429" enable-background="new -11 170 1000 429" xml:space="preserve">
                 </svg>
             </div>
@@ -31,29 +31,28 @@
                 </ul>
             </nav>
         </header>
-
-        <div class="message">
-                <div class="text">
-                <h1>Message App</h1>
-                <h2>tldr</h2>
+        <div class="container" style="color: black">
+            <div class="text">
+                <h1>Convey</h1>
+                <h2>messaging</h2>
                     <div style="border: darkgrey">
-                        <p onclick="show('message')" >
+                        <button onclick="load()" style="background-color: transparent;">
                             Click to start conversation
-                        </p>
-                        <div class="row">I am a row<div>
+                        </button>
+                    </div>
+                <div class="jumbotron" style="border: darkgrey; color: white; background-color: black">ttt
+                </div>
             </div>
         </div>
+        <input id="message" value="asdf">
     </div>
 
     <footer>
         <p class="footer-contents">Designed and developed with <a href="https://aws.amazon.com/careers/devtools-jobs/">♥</a> in Seattle.</p>
     </footer>
 
-    <script src="assets/js/set-background.js"></script>
-    <script src = "assets/js/conversation.js">
-            load();
-            show(data);
-    </script>
+    <!--<script src="assets/js/set-background.js"></script>-->
+    </script src = "assets/js/conversation.js">
 </body>
 
 </html>
