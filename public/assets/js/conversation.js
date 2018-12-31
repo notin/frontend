@@ -12,7 +12,7 @@ function load()
 
     let responseText = null;
     try {
-         responseText = JSON.stringify(http.responseText);
+        responseText = JSON.parse(http.responseText);
     }
     catch (e) {
 
