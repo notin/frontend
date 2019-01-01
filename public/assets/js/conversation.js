@@ -17,7 +17,8 @@ function call(http, method, body) {
         http.send();
     }
     else {
-        http.send(body);
+        var stringify = JSON.stringify(body);
+        http.send(stringify);
     }
     let responseText = null;
     try {
@@ -31,7 +32,7 @@ function call(http, method, body) {
 
 function load() {
     console.log('attempting to make call ');
-    const http = new XMLHttpRequest();
+    let http = new XMLHttpRequest();
     let responseText = call(http, 'GET', null);
     console.log('printing text');
     console.log(responseText);
@@ -39,20 +40,40 @@ function load() {
 }
 function setText(element, load1) {
     console.log("about to place value in area");
-    var elementById = document.getElementById('message');
+    var elementById = document.getElementById("message");
     console.log(load1);
-    elementById.innerText = "[You]\r\n" + load1.messageItem.message + "\r\n";
+    var messages = "";
+    var length = 0;
+    var boolean = load1["messageItem"].length > 0;
+    console.log("value is " + boolean);
+    if (boolean) {
+        length = load1["messageItem"].length;
+        for (var i = 0; i < length; i++) {
+            messages += "[You]\r\n" + load1["messageItem"][i].message + "\r\n";
+        }
+    }
+    console.log("message is " + messages);
+    elementById.innerHTML = messages;
     return elementById
 }
+
+function makePostCall(elementById, load1, responseText) {
+    if (elementById !== 'say something') {
+        console.log("makingPost call");
+        let http = new XMLHttpRequest();
+        load1["messageItem"][0].message = elementById.value;
+        load1["messageItem"][0].user = "You";
+        console.log(load1);
+        // const url='http://localhost:8080/conversation?id=null';
+        responseText = call(http, 'POST', load1);
+    }
+    return responseText;
+}
+
 function show(element) {
     var load1 = load();
     var elementById = document.getElementById('yourMessage');
-    if (elementById !== 'say something') {
-        console.log("sending");
-        const http = new XMLHttpRequest();
-        load1.messageItem.message = elementById.innerText
-        // const url='http://localhost:8080/conversation?id=null';
-        let responseText = call(http, 'POST', JSON.stringify(load1));
-    }
-    setText(element, load1);
+    let responseText = load1;
+    responseText = makePostCall(elementById, load1, responseText);
+    setText(element, responseText);
 }
