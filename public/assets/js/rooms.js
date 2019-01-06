@@ -1,13 +1,5 @@
 function call(http, method, body) {
-    var id = "null";
-    try {
-        id = body["id"];
-    }
-    catch (e) {
-
-    }
-
-    var url = 'http://localhost:8080/conversation?id=' + id;
+    var url = 'http://localhost:8080/roomprovider';
     console.log(url);
     http.open(method, url, false);
     let value = "application/json; charset=utf-8;";
@@ -25,7 +17,7 @@ function call(http, method, body) {
         responseText = JSON.parse(http.responseText);
     }
     catch (e) {
-
+        console.log(e)
     }
     return responseText;
 }
@@ -39,27 +31,32 @@ function load() {
     return responseText
 }
 
-function concatMessages(boolean, length, load1, messages) {
+function buildList(boolean, length, load1) {
+    var container = document.getElementById("listOfRooms");
     if (boolean) {
-        length = load1["messageItem"].length;
+        length = load1["provider"].length;
         for (var i = 0; i < length; i++) {
-            messages += "[You]\r\n" + load1["messageItem"][i].message + "\r\n";
+            console.log("appending element");
+            var li = document.createElement("li");
+            var load1ElementElementElement = load1["provider"][i]["location"];
+            if (load1ElementElementElement == null || load1ElementElementElement == "") {
+                load1ElementElementElement = "unavailable"
+            }
+            li.innerText = load1ElementElementElement;
+            container.appendChild(li);
         }
     }
     return messages;
 }
 
-function setText(element, load1) {
+function setText(load1) {
     console.log("about to place value in area");
-    var elementById = document.getElementById("message");
     console.log(load1);
-    var messages = "";
     var length = 0;
-    var boolean = load1["messageItem"].length > 0;
+    var boolean = load1["provider"].length > 0;
     console.log("value is " + boolean);
-    messages = concatMessages(boolean, length, load1, messages);
+    messages = buildList(boolean, length, load1);
     console.log("message is " + messages);
-    elementById.innerHTML = messages;
     return elementById
 }
 
@@ -75,10 +72,7 @@ function makePostCall(elementById, load1, responseText) {
     return responseText;
 }
 
-function show(element) {
+function show() {
     var load1 = load();
-    var elementById = document.getElementById('yourMessage');
-    let responseText = load1;
-    responseText = makePostCall(elementById, load1, responseText);
-    setText(element, responseText);
+    setText(load1);
 }
