@@ -1,28 +1,34 @@
-function call(http, method, body) {
+function call(http, method, body)
+{
     var url = 'http://localhost:8080/roomprovider';
     console.log(url);
     http.open(method, url, false);
     let value = "application/json; charset=utf-8;";
     http.setRequestHeader('Accept', value);
     http.setRequestHeader('Content-Type', value);
-    if (body === null) {
+    if (body === null)
+    {
         http.send();
     }
-    else {
+    else
+    {
         var stringify = JSON.stringify(body);
         http.send(stringify);
     }
     let responseText = null;
-    try {
+    try
+    {
         responseText = JSON.parse(http.responseText);
     }
-    catch (e) {
+    catch (e)
+    {
         console.log(e)
     }
     return responseText;
 }
 
-function load() {
+function load()
+{
     console.log('attempting to make call ');
     let http = new XMLHttpRequest();
     let responseText = call(http, 'GET', null);
@@ -31,15 +37,19 @@ function load() {
     return responseText
 }
 
-function buildList(boolean, length, load1) {
+function buildList(boolean, length, load1)
+{
     var container = document.getElementById("listOfRooms");
-    if (boolean) {
+    if (boolean)
+    {
         length = load1["provider"].length;
-        for (var i = 0; i < length; i++) {
+        for (var i = 0; i < length; i++)
+        {
             console.log("appending element");
             var li = document.createElement("li");
             var load1ElementElementElement = load1["provider"][i]["location"];
-            if (load1ElementElementElement == null || load1ElementElementElement == "") {
+            if (load1ElementElementElement == null || load1ElementElementElement == "")
+            {
                 load1ElementElementElement = "unavailable"
             }
             li.innerText = load1ElementElementElement;
@@ -49,7 +59,8 @@ function buildList(boolean, length, load1) {
     return messages;
 }
 
-function setText(load1) {
+function setText(load1)
+{
     console.log("about to place value in area");
     console.log(load1);
     var length = 0;
@@ -60,8 +71,10 @@ function setText(load1) {
     return elementById
 }
 
-function makePostCall(elementById, load1, responseText) {
-    if (elementById !== 'say something') {
+function makePostCall(elementById, load1, responseText)
+{
+    if (elementById !== 'say something')
+    {
         console.log("makingPost call");
         let http = new XMLHttpRequest();
         load1["messageItem"][0].message = elementById.value;
@@ -72,7 +85,8 @@ function makePostCall(elementById, load1, responseText) {
     return responseText;
 }
 
-function show() {
+function show()
+{
     var load1 = load();
     setText(load1);
 }

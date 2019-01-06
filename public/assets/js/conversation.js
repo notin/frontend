@@ -1,9 +1,12 @@
-function call(http, method, body) {
+function call(http, method, body)
+{
     var id = "null";
-    try {
+    try
+    {
         id = body["id"];
     }
-    catch (e) {
+    catch (e)
+    {
 
     }
 
@@ -13,24 +16,29 @@ function call(http, method, body) {
     let value = "application/json; charset=utf-8;";
     http.setRequestHeader('Accept', value);
     http.setRequestHeader('Content-Type', value);
-    if (body === null) {
+    if (body === null)
+    {
         http.send();
     }
-    else {
+    else
+    {
         var stringify = JSON.stringify(body);
         http.send(stringify);
     }
     let responseText = null;
-    try {
+    try
+    {
         responseText = JSON.parse(http.responseText);
     }
-    catch (e) {
+    catch (e)
+    {
 
     }
     return responseText;
 }
 
-function load() {
+function load()
+{
     console.log('attempting to make call ');
     let http = new XMLHttpRequest();
     let responseText = call(http, 'GET', null);
@@ -39,17 +47,21 @@ function load() {
     return responseText
 }
 
-function concatMessages(boolean, length, load1, messages) {
-    if (boolean) {
+function concatMessages(boolean, length, load1, messages)
+{
+    if (boolean)
+    {
         length = load1["messageItem"].length;
-        for (var i = 0; i < length; i++) {
+        for (var i = 0; i < length; i++)
+        {
             messages += "[You]\r\n" + load1["messageItem"][i].message + "\r\n";
         }
     }
     return messages;
 }
 
-function setText(element, load1) {
+function setText(element, load1)
+{
     console.log("about to place value in area");
     var elementById = document.getElementById("message");
     console.log(load1);
@@ -63,8 +75,10 @@ function setText(element, load1) {
     return elementById
 }
 
-function makePostCall(elementById, load1, responseText) {
-    if (elementById !== 'say something') {
+function makePostCall(elementById, load1, responseText)
+{
+    if (elementById !== 'say something')
+    {
         console.log("makingPost call");
         let http = new XMLHttpRequest();
         load1["messageItem"][0].message = elementById.value;
@@ -75,7 +89,8 @@ function makePostCall(elementById, load1, responseText) {
     return responseText;
 }
 
-function show(element) {
+function show(element)
+{
     var load1 = load();
     var elementById = document.getElementById('yourMessage');
     let responseText = load1;
