@@ -1,6 +1,6 @@
 function call(http, method, body)
 {
-    var id = "null";
+    var id = "f37858b2-687e-43e9-846e-7dad2c4c83b4";
     try
     {
         id = body["id"];
@@ -63,15 +63,38 @@ function concatMessages(boolean, length, load1, messages)
 function setText(element, load1)
 {
     console.log("about to place value in area");
-    var elementById = document.getElementById("message");
+    let elementById = document.getElementById("message");
     console.log(load1);
-    var messages = "";
-    var length = 0;
-    var boolean = load1["messageItem"].length > 0;
-    console.log("value is " + boolean);
-    messages = concatMessages(boolean, length, load1, messages);
-    console.log("message is " + messages);
-    elementById.innerHTML = elementById.innerText += messages;
+    let messages = "";
+    let length = 0;
+    let boolean = load1["messageItem"].length > 0;
+    let loadElement = load1["messageItem"];
+
+    for (var i = 0; i < loadElement.length; i++)
+    {
+        let li = document.createElement("div");
+
+        let element = loadElement[i];
+        let user = element["user"];
+        var newChild = document.createTextNode("[" + user + "]" + element["message"]);
+        if (user === "You")
+        {
+            newChild.setAttribute = "style = align: right";
+        }
+        else
+        {
+            newChild.setAttribute = "style = align: left";
+        }
+
+        li.appendChild(newChild);
+        li.setAttribute("id", element["id"]); // added line
+        console.log("value is " + boolean);
+        messages = concatMessages(boolean, length, load1, messages);
+        console.log("message is " + messages);
+        // elementById.innerHTML = elementById.innerText += messages;
+        elementById.appendChild(li);
+    }
+
     return elementById
 }
 
