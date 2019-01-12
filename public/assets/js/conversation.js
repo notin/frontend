@@ -54,7 +54,7 @@ function concatMessages(boolean, length, load1, messages)
         length = load1["messageItem"].length;
         for (var i = 0; i < length; i++)
         {
-            messages += "[You]\r\n" + load1["messageItem"][i].message + "\r\n";
+            messages += "[" + load1["messageItem"][i] + "]\r\n" + load1["messageItem"][i].message + "\r\n";
         }
     }
     return messages;
@@ -71,7 +71,7 @@ function setText(element, load1)
     console.log("value is " + boolean);
     messages = concatMessages(boolean, length, load1, messages);
     console.log("message is " + messages);
-    elementById.innerHTML = messages;
+    elementById.innerHTML = elementById.innerText += messages;
     return elementById
 }
 
@@ -81,9 +81,18 @@ function makePostCall(elementById, load1, responseText)
     {
         console.log("makingPost call");
         let http = new XMLHttpRequest();
-        load1["messageItem"][0].message = elementById.value;
-        load1["messageItem"][0].user = "You";
-        console.log(load1);
+        var load1ElementElement = load1["messageItem"];
+        for (var i = 0; i < load1ElementElement.length; i++)
+        {
+
+            var load1ElementElementElement = load1ElementElement[i];
+            load1ElementElementElement.message = elementById.value;
+            if (load1ElementElementElement.user === null || load1ElementElementElement.user == "")
+            {
+                load1ElementElementElement.user = "You";
+            }
+            console.log(load1);
+        }
         responseText = call(http, 'POST', load1);
     }
     return responseText;
