@@ -60,6 +60,19 @@ function concatMessages(boolean, length, load1, messages)
     return messages;
 }
 
+function setAlignemt(user, newChild)
+{
+    if (user !== "You")
+    {
+
+        newChild.setAttribute("style", "align: right");
+    }
+    else
+    {
+        newChild.setAttribute("style", "align: left");
+    }
+}
+
 function setText(element, load1)
 {
     console.log("about to place value in area");
@@ -76,20 +89,14 @@ function setText(element, load1)
 
         let element = loadElement[i];
         let user = element["user"];
-        var newChild = document.createTextNode("[" + user + "]" + element["message"]);
-        if (user === "You")
-        {
-            newChild.setAttribute = "style = align: right";
-        }
-        else
-        {
-            newChild.setAttribute = "style = align: left";
-        }
+        let newChild = document.createTextNode("[" + user + "]" + element["message"]);
+
 
         li.appendChild(newChild);
         li.setAttribute("id", element["id"]); // added line
+        setAlignemt(user, li);
+
         console.log("value is " + boolean);
-        messages = concatMessages(boolean, length, load1, messages);
         console.log("message is " + messages);
         // elementById.innerHTML = elementById.innerText += messages;
         elementById.appendChild(li);
